@@ -4,7 +4,8 @@ import Image from "next/image"
 const Logout = () => {
   return (
     <div className="flex flex-col p-6 justify-between h-screen ">
-      <h1 className="text-xl mb-6">Logo</h1>
+      <div>            <Image src="/twitter-logo.png" alt="Twitter" width={50} height={50} />
+</div>
 
       <div className=" ">
         <div className="flex mb-4">

@@ -4,7 +4,7 @@ import { FaRegThumbsUp } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
 
 
-const LastTweets = () => {
+const LastTweets = (props) => {
   return (
     <div className="text-white p-4 justify-center items-center">
       <div className="flex justify-start items-center">
@@ -16,7 +16,7 @@ const LastTweets = () => {
           Username <span className="text-slate-400">@username</span>
         </p>
       </div>
-      <p className="mb-4 text-lg">This is an example of the text of tweet</p>
+      <p className="mb-4 text-lg">{props.content}</p>
       <div className="flex text-white  ">
         {" "}
         <FaRegThumbsUp  className="mr-2"/>

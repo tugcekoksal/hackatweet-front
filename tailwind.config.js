@@ -4,6 +4,9 @@ module.exports = {
   './components/**/*.{js,jsx}',],
   theme: {
     extend: {
+      backgroundImage: theme => ({
+        'login': "url('/background.jpg')",
+      }),
       fontFamily: {
         'mont-heavy': ['Mont-Heavy', 'sans-serif'],
         'verdana': ['Verdana', 'sans-serif'],
