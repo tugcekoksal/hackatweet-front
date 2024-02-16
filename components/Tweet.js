@@ -7,27 +7,28 @@ import { useSelector } from "react-redux"
 const Tweet = () => {
   const dispatch = useDispatch()
   const user = useSelector((state) => state.user.value)
-  const [tweet, setTweet] = useState("")
+  const [tweetinput, setTweetInput] = useState("")
   function handleTweetInput(e) {
-    setTweet(e.target.value)
+    setTweetInput(e.target.value)
   }
   function handleTweet() {
-    console.log(tweet)
+
     fetch("http://localhost:3000/tweet", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        content: tweet,
-        author: user.username,
+        content: tweetinput,
+        username: user.username,
+        firstname: user.firstname,
         hashtag: "skhjbdnks",
       }),
     })
       .then((response) => response.json())
       .then((data) => {
         dispatch(addTweet(data.tweet))
-        setTweet("")
+        setTweetInput("")
         console.log(data)
       })
   }
@@ -37,14 +38,14 @@ const Tweet = () => {
       <h1 className="text-xl mb-6">Home</h1>
       <input
         onChange={(e) => handleTweetInput(e)}
-        value={tweet}
+        value={tweetinput}
         className=" mb-6 bg-transparent block w-full appearance-none border-b py-4 border-slate-500 "
         type="text"
         placeholder="What's up?"
         id="tweet"
       />
       <div className="flex w-full justify-end items-center">
-        <p className="mr-4">{tweet.length}/280</p>
+        <p className="mr-4">{tweetinput.length}/280</p>
         <button
           onClick={handleTweet}
           className="bg-blue-500 px-6 py-2 rounded-full "

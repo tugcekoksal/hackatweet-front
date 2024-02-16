@@ -4,11 +4,12 @@ import LastTweets from "./LastTweets"
 import Trends from "./Trends"
 import Logout from "./Logout"
 import { useEffect,useState } from "react"
+
 import { useSelector } from "react-redux"
 
 function Home() {
   const tweets = useSelector((state) => state.tweet.value)
-  const [lastTweets, setLastTweet] = useState([])
+  const [lastTweets, setLastTweets] = useState([])
   
 
   useEffect(() => {
@@ -16,7 +17,7 @@ function Home() {
       .then((response) => response.json())
       .then((data) => {
         console.log(data)
-       setLastTweet(data.map((tweet) =><LastTweets content={tweet.content}/>))
+       setLastTweets(data.map((tweet,index) =><LastTweets key={index} content={tweet.content} username={tweet.author} firstname={tweet.firstname}/>))
        
       })
   }, [tweets])

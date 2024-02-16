@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-	value: { },
+	value: {content:null,username:null,firstname:null,hashtags:[] },
 };
 
 export const tweetSlice = createSlice({
@@ -9,7 +9,11 @@ export const tweetSlice = createSlice({
 	initialState,
 	reducers: {
 		addTweet: (state, action) => {
-			state.value=(action.payload);
+			state.value.content = action.payload.content;
+			state.value.username = action.payload.username;
+			state.value.firstname = action.payload.firstname;
+			state.value.hashtags = action.payload.hashtags;
+	
 		},
 		removeTweet: (state, action) => {
 			state.value = state.value.filter(bookmark => bookmark.title !== action.payload.title);

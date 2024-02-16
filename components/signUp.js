@@ -1,7 +1,37 @@
 import React from "react";
 import Image from "next/image";
+import { useState } from "react";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { login } from "../reducers/user";
 
 const SignUp = (props) => {
+  const dispatch=useDispatch()
+  const user = useSelector((state) => state.user.value)
+
+  const [firstname,setFirstname]=useState('')
+  const [username,setUsername]=useState('')
+  const [password,setPassword]=useState('')
+
+  function handleSignUp(){
+    fetch("http://localhost:3000/users/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        firstname: firstname,
+        username: username,
+        password: password,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        dispatch(login(data.user))
+       
+        console.log(data.user)
+      })
+  }
 
   return <div className="absolute rounded-2xl  p-6 bg-slate-700 text-white w-[500px] h-[450px] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
   <div className="flex w-full justify-end">
@@ -26,16 +56,19 @@ const SignUp = (props) => {
     <div className="flex flex-col justify-center items-center mb-2 p-2">
       {" "}
       <input
+      onChange={(e)=>setFirstname(e.target.value)}
         className="bg-transparent border border-white w-full mb-4 p-2"
         placeholder="Firstname"
         type="text"
       />
       <input
+        onChange={(e)=>setUsername(e.target.value)}
         className="bg-transparent border border-white w-full mb-4 p-2"
         placeholder="Username"
         type="text"
       />
       <input
+        onChange={(e)=>setPassword(e.target.value)}
         className="bg-transparent border border-white w-full  p-2"
         placeholder="Password"
         type="text"
