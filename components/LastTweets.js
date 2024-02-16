@@ -15,7 +15,7 @@ const LastTweets = (props) => {
           <Image src="/avatar.png" alt="Twitter" width={50} height={50} />
         </div>
         <p className="text-lg ">
-          {props.firstname} <span className="text-slate-400 ">@{props.username}</span>
+          {props.firstname}<span className="text-slate-400 "> @{props.username}</span>
         </p>
       </div>
       <p className="mb-4 text-lg">{props.content}</p>

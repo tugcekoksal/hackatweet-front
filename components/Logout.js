@@ -3,8 +3,10 @@ import Image from "next/image"
 
 import { useDispatch } from "react-redux";
 import { logout } from "../reducers/user";
+import { useSelector } from "react-redux"
 
 const Logout = () => {
+  const user = useSelector((state) => state.user.value)
   const dispatch=useDispatch()
   
   function handleLogout(){
@@ -22,11 +24,11 @@ const Logout = () => {
             <Image src="/avatar.png" alt="Twitter" width={50} height={50} />
           </div>
           <div>
-            <p className="text-lg ">Username</p>
-            <span className="text-slate-400">@username</span>
+            <p className="text-lg ">{user.firstname}</p>
+            <span className="text-slate-400">@{user.username}</span>
           </div>
         </div>
-          <button onClick={handleLogout} className="bg-transparant border border-black text-sm px-4 py-2 rounded-full">
+          <button onClick={handleLogout} className="bg-transparant border border-white text-sm px-4 py-2 rounded-full">
             Logout
           </button>
   
