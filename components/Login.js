@@ -32,7 +32,7 @@ const Login = () => {
   return (
     <>
       {isModalSignUp && <SignUp handleClose={handleClose}/>}
-      {isModalSignIn && <SignIn/>}
+      {isModalSignIn && <SignIn handleClose={handleClose}/>}
    
 
       <div className="flex h-screen bg-slate-800 text-white font-bold font-mont-heavy">

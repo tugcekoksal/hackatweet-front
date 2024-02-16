@@ -2,15 +2,11 @@ import React from "react";
 import Image from "next/image";
 
 const SignIn = (props) => {
-    function handleCloseSignIn() {
-    props.handleClose()
-    console.log('close')
-  
-  }
+ 
   return <div className="absolute rounded-2xl  p-6 bg-slate-700 text-white w-[500px] h-[400px] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
   <div className="flex w-full justify-end">
     {" "}
-    <button onClick={handleCloseSignIn} className="text-xl">
+    <button onClick={()=>props.handleClose()} className="text-xl">
       x
     </button>
   </div>
