@@ -10,6 +10,7 @@ const Tweet = () => {
   const [tweet, setTweet] = useState("");
   function handleTweetInput(e){
     setTweet(e.target.value);
+   
 
   }
   function handleTweet() {
@@ -24,6 +25,7 @@ const Tweet = () => {
       .then((response) => response.json())
       .then((data) => {
         dispatch(addTweet(data.tweet));
+        setTweet('')
         console.log(data);
       });
   }
