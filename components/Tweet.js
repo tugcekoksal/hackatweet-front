@@ -1,17 +1,32 @@
-import React from "react"
-import { useState } from "react"
-import { useDispatch } from "react-redux"
-import { addTweet } from "../reducers/tweet"
-import { useSelector } from "react-redux"
+import React from "react";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addTweet } from "../reducers/tweet";
+import { useSelector } from "react-redux";
 
 const Tweet = () => {
-  const dispatch = useDispatch()
-  const user = useSelector((state) => state.user.value)
-  const [tweetinput, setTweetInput] = useState("")
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user.value);
+  const [tweetinput, setTweetInput] = useState("");
   function handleTweetInput(e) {
-    setTweetInput(e.target.value)
+    setTweetInput(e.target.value);
   }
+
+  function extractHashtags(text) {
+    const regex = /#(\w+)/g;
+    const hashtags = text.match(regex);
+    //console.log(regex);
+    //console.log(hashtags);
+    if (hashtags) {
+      return hashtags.map((tag) => tag.toLowerCase());
+    } else {
+      return [];
+    }
+  }
+
   function handleTweet() {
+    const hashtags = extractHashtags(tweetinput);
+    console.log(hashtags);
 
     fetch("http://localhost:3000/tweet", {
       method: "POST",
@@ -22,15 +37,15 @@ const Tweet = () => {
         content: tweetinput,
         username: user.username,
         firstname: user.firstname,
-        hashtag: "skhjbdnks",
+        hashtags: hashtags,
       }),
     })
       .then((response) => response.json())
       .then((data) => {
-        dispatch(addTweet(data.tweet))
-        setTweetInput("")
-        console.log(data)
-      })
+        dispatch(addTweet(data.tweet));
+        setTweetInput("");
+        console.log(data);
+      });
   }
 
   return (
@@ -54,7 +69,7 @@ const Tweet = () => {
         </button>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Tweet
+export default Tweet;
