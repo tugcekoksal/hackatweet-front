@@ -17,7 +17,7 @@ function Home() {
       .then((response) => response.json())
       .then((data) => {
         console.log(data)
-       setLastTweets(data.map((tweet,index) =><LastTweets key={index} content={tweet.content} username={tweet.username} firstname={tweet.firstname}/>))
+       setLastTweets(data.map((tweet,index) =><LastTweets id={tweet._id} key={index} content={tweet.content} username={tweet.username} firstname={tweet.firstname}/>))
        
       })
   }, [tweets])

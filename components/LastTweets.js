@@ -1,11 +1,31 @@
 import React from "react"
 import Image from "next/image"
-import { FaRegThumbsUp } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { removeTweet } from "../reducers/tweet";
+import { BiSolidLike } from "react-icons/bi";
+
 
 
 
 const LastTweets = (props) => {
+  const [isLiked, setIsLiked] = React.useState(false)
+  const dispatch=useDispatch()
+  const user = useSelector((state) => state.user.value)
+  function handleDelete(){
+    fetch(`http://localhost:3000/tweet/${props.id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data)
+        dispatch(removeTweet())
+      })
+  }
 
   return (
     <div className="text-white p-4 justify-center items-center">
@@ -21,8 +41,9 @@ const LastTweets = (props) => {
       <p className="mb-4 text-lg">{props.content}</p>
       <div className="flex text-white  ">
         {" "}
-        <FaRegThumbsUp  className="mr-2"/>
-        <RiDeleteBin6Line />
+        <BiSolidLike onClick={()=>setIsLiked(!isLiked)} className={`mr-2  `}  style={isLiked ? {color: 'red'} : {color: 'white'}}/>
+        {user.username === props.username && <RiDeleteBin6Line onClick={handleDelete}  className="mr-2"/>}
+    
       </div>
     </div>
   )

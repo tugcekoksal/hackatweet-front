@@ -1,13 +1,13 @@
 import React from "react";
 import Image from "next/image";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+
 import { useDispatch } from "react-redux";
 import { login } from "../reducers/user";
 
 const SignUp = (props) => {
   const dispatch=useDispatch()
-  const user = useSelector((state) => state.user.value)
+
 
   const [firstname,setFirstname]=useState('')
   const [username,setUsername]=useState('')

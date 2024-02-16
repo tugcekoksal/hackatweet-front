@@ -16,7 +16,10 @@ export const tweetSlice = createSlice({
 	
 		},
 		removeTweet: (state, action) => {
-			state.value = state.value.filter(bookmark => bookmark.title !== action.payload.title);
+			state.value.content = null
+			state.value.username = null
+			state.value.firstname = null
+			state.value.hashtags = null
 		},
 	
 	},
