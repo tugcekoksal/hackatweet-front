@@ -12,14 +12,16 @@ export const tweetSlice = createSlice({
 			state.value.content = action.payload.content;
 			state.value.username = action.payload.username;
 			state.value.firstname = action.payload.firstname;
-			state.value.hashtags = action.payload.hashtags;
+			state.value.hashtags.push(action.payload.hashtags)
+		
 	
 		},
-		removeTweet: (state, action) => {
+		removeTweet: (state) => {
 			state.value.content = null
 			state.value.username = null
 			state.value.firstname = null
-			state.value.hashtags = null
+			state.value.hashtags = []
+
 		},
 	
 	},

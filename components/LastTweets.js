@@ -5,14 +5,16 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { removeTweet } from "../reducers/tweet";
 import { BiSolidLike } from "react-icons/bi";
+import { useState } from "react";
 
 
 
 
 const LastTweets = (props) => {
-  const [isLiked, setIsLiked] = React.useState(false)
+  const [isLiked, setIsLiked] = useState(false)
   const dispatch=useDispatch()
   const user = useSelector((state) => state.user.value)
+  
   function handleDelete(){
     fetch(`http://localhost:3000/tweet/${props.id}`, {
       method: "DELETE",
